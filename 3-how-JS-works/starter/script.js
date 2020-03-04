@@ -1,6 +1,12 @@
 ///////////////////////////////////////
 // Lecture: Hoisting
 
+var a, b, c;
+a = 1;
+b = 10;
+c = 100;
+
+console.log(b - a >= c);
 
 
 
@@ -66,12 +72,3 @@ function third() {
 
 ///////////////////////////////////////
 // Lecture: The this keyword
-
-
-
-
-
-
-
-
-
