@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Section 2: JavaScript Language Basics</title>
-    </head>
 
-    <body>
-        <h1>Section 2: JavaScript Language Basics</h1>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Section 2: JavaScript Language Basics</title>
+</head>
+
+<body>
+    <h1>Section 2: JavaScript Language Basics</h1>
+
+    <h2>Challenge</h2>
+
+    <script>
+        let mark = {
+            'mass': parseInt(prompt('Mark\'s mass:')),
+            'height': parseInt(prompt('Mark\'s height:'))
+        }
+
+        let john = {
+            'mass': parseInt(prompt('John\'s mass:')),
+            'height': parseInt(prompt('John\'s height:'))
+        }
+
+        let markBMI = mark.mass / (mark.height * mark.height);
+        let johnBMI = john.mass / (john.height * john.height);
+
+        let isHigherThanJohn = markBMI > johnBMI;
+
+        console.log(markBMI, johnBMI, isHigherThanJohn);
+        console.log('Is Mark\'s BMI higher than John\'s? ' + isHigherThanJohn);
+        
+    </script>
+
+</body>
+
 </html>
