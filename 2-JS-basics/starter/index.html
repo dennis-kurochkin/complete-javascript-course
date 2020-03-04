@@ -9,27 +9,63 @@
 <body>
     <h1>Section 2: JavaScript Language Basics</h1>
 
-    <h2>Challenge</h2>
+    <h2>1st Challenge</h2>
 
     <script>
-        let mark = {
-            'mass': parseInt(prompt('Mark\'s mass:')),
-            'height': parseInt(prompt('Mark\'s height:'))
+        // let mark = {
+        //     'mass': parseInt(prompt('Mark\'s mass:')),
+        //     'height': parseInt(prompt('Mark\'s height:'))
+        // }
+
+        // let john = {
+        //     'mass': parseInt(prompt('John\'s mass:')),
+        //     'height': parseInt(prompt('John\'s height:'))
+        // }
+
+        // let markBMI = mark.mass / (mark.height * mark.height);
+        // let johnBMI = john.mass / (john.height * john.height);
+
+        // let isHigherThanJohn = markBMI > johnBMI;
+
+        // // console.log(markBMI, johnBMI, isHigherThanJohn);
+        // console.log('Is Mark\'s BMI higher than John\'s? ' + isHigherThanJohn);
+    </script>
+
+    <h2>2nd Challenge</h2>
+
+    <script>
+        let
+            winner,
+            johnsTotal, mikesTotal, marysTotal,
+            gamesPlayed = 3;
+
+        const
+            johns = [89, 120, 173],
+            mikes = [116, 94, 193],
+            marys = [97, 134, 155];
+
+
+        johns.forEach((elem) => johnsTotal = +elem);
+
+        mikes.forEach((elem) => mikesTotal = +elem);
+
+        marys.forEach((elem) => marysTotal = +elem);
+
+        switch (true) {
+            case johnsTotal > mikesTotal && johnsTotal > marysTotal:
+                winner = 'John'
+                break;
+            case mikesTotal > johnsTotal && mikesTotal > marysTotal:
+                winner = 'Mike'
+                break;
+            case marysTotal > johnsTotal && marysTotal > mikesTotal:
+                winner = 'Mary'
+                break;
+            default:
+                break;
         }
 
-        let john = {
-            'mass': parseInt(prompt('John\'s mass:')),
-            'height': parseInt(prompt('John\'s height:'))
-        }
-
-        let markBMI = mark.mass / (mark.height * mark.height);
-        let johnBMI = john.mass / (john.height * john.height);
-
-        let isHigherThanJohn = markBMI > johnBMI;
-
-        console.log(markBMI, johnBMI, isHigherThanJohn);
-        console.log('Is Mark\'s BMI higher than John\'s? ' + isHigherThanJohn);
-        
+        winner ? console.log(winner + ' is a winner!') : console.log('draw!');
     </script>
 
 </body>
