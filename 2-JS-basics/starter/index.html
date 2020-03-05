@@ -35,37 +35,55 @@
 
     <script>
         let
-            winner,
-            johnsTotal, mikesTotal, marysTotal,
+            winner, winnerScore,
+            johnsTotal = 0,
+            mikesTotal = 0,
+            marysTotal = 0,
             gamesPlayed = 3;
 
         const
-            johns = [89, 120, 173],
+            johns = [89, 100, 173],
             mikes = [116, 94, 193],
-            marys = [97, 134, 155];
+            marys = [197, 134, 155];
 
 
-        johns.forEach((elem) => johnsTotal = +elem);
+        johns.forEach((elem) => johnsTotal += elem);
 
-        mikes.forEach((elem) => mikesTotal = +elem);
+        mikes.forEach((elem) => mikesTotal += elem);
 
-        marys.forEach((elem) => marysTotal = +elem);
+        marys.forEach((elem) => marysTotal += elem);
+
+
+        johnsTotal = johnsTotal / 3;
+
+        mikesTotal = mikesTotal / 3;
+
+        marysTotal = marysTotal / 3;
+
 
         switch (true) {
             case johnsTotal > mikesTotal && johnsTotal > marysTotal:
-                winner = 'John'
+                winner = 'John';
+                winnerScore = johnsTotal;
                 break;
             case mikesTotal > johnsTotal && mikesTotal > marysTotal:
                 winner = 'Mike'
+                winnerScore = mikesTotal;
                 break;
             case marysTotal > johnsTotal && marysTotal > mikesTotal:
                 winner = 'Mary'
+                winnerScore = marysTotal;
                 break;
             default:
                 break;
         }
 
-        winner ? console.log(winner + ' is a winner!') : console.log('draw!');
+        winnerScore = winnerScore.toFixed();
+
+
+        winner ?
+            console.log(winner + ' is a winner! His score is ' + winnerScore + ' points.') :
+            console.log('It\'s a draw!');
     </script>
 
 </body>
