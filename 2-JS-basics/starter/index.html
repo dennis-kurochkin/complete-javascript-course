@@ -86,31 +86,69 @@
         //     console.log('It\'s a draw!');
     </script>
 
-    <h3>3rd Challenge</h3>
+    <h2>3rd Challenge</h2>
 
     <script>
-        let
-            bills = [124, 46, 268],
-            tips = [],
-            finals = [];
+        // let
+        //     bills = [124, 46, 268],
+        //     tips = [],
+        //     finals = [];
 
-        const calculateTip = (bill) => {
-            switch (true) {
-                case bill < 50:
-                    return bill * .2;
-                case bill <= 200:
-                    return bill * .15;
-                default:
-                    return bill * .1;
+        // const calculateTip = (bill) => {
+        //     switch (true) {
+        //         case bill < 50:
+        //             return bill * .2;
+        //         case bill <= 200:
+        //             return bill * .15;
+        //         default:
+        //             return bill * .1;
+        //     }
+        // }
+
+        // bills.forEach((bill) => {
+        //     tips.push(calculateTip(bill).toFixed());
+        //     finals.push(bill + calculateTip(bill));
+        // });
+
+        // console.log(tips, finals);
+    </script>
+
+    <h2>4th Challenge</h2>
+
+    <script>
+        let people = [{
+                'name': 'Mark',
+                'mass': 60,
+                'height': 175,
+                'calcBMI': function () {
+                    let bmi = this.mass / (this.height * this.height);
+                    this.bmi = bmi;
+                    return bmi;
+                }
+            },
+            {
+                'name': 'John',
+                'mass': 60,
+                'height': 180,
+                'calcBMI': function () {
+                    let bmi = this.mass / (this.height * this.height);
+                    this.bmi = bmi;
+                    return bmi;
+                }
             }
-        }
+        ];
 
-        bills.forEach((bill) => {
-            tips.push(calculateTip(bill).toFixed());
-            finals.push(bill + calculateTip(bill));
+        people.forEach(elem => {
+            elem.calcBMI();
         });
 
-        console.log(tips, finals);
+        if (people[0].bmi > people[1].bmi) {
+            console.log('Mark has the highest');
+        } else if (people[1].bmi > people[0].bmi) {
+            console.log('John has the highest');
+        } else {
+            console.log('The\'re same!');
+        }
     </script>
 
 </body>
