@@ -34,56 +34,83 @@
     <h2>2nd Challenge</h2>
 
     <script>
+        // let
+        //     winner, winnerScore,
+        //     johnsTotal = 0,
+        //     mikesTotal = 0,
+        //     marysTotal = 0,
+        //     gamesPlayed = 3;
+
+        // const
+        //     johns = [89, 100, 173],
+        //     mikes = [116, 94, 193],
+        //     marys = [197, 134, 155];
+
+
+        // johns.forEach((elem) => johnsTotal += elem);
+
+        // mikes.forEach((elem) => mikesTotal += elem);
+
+        // marys.forEach((elem) => marysTotal += elem);
+
+
+        // johnsTotal = johnsTotal / 3;
+
+        // mikesTotal = mikesTotal / 3;
+
+        // marysTotal = marysTotal / 3;
+
+
+        // switch (true) {
+        //     case johnsTotal > mikesTotal && johnsTotal > marysTotal:
+        //         winner = 'John';
+        //         winnerScore = johnsTotal;
+        //         break;
+        //     case mikesTotal > johnsTotal && mikesTotal > marysTotal:
+        //         winner = 'Mike'
+        //         winnerScore = mikesTotal;
+        //         break;
+        //     case marysTotal > johnsTotal && marysTotal > mikesTotal:
+        //         winner = 'Mary'
+        //         winnerScore = marysTotal;
+        //         break;
+        //     default:
+        //         break;
+        // }
+
+        // winnerScore = winnerScore.toFixed();
+
+
+        // winner ?
+        //     console.log(winner + ' is a winner! His score is ' + winnerScore + ' points.') :
+        //     console.log('It\'s a draw!');
+    </script>
+
+    <h3>3rd Challenge</h3>
+
+    <script>
         let
-            winner, winnerScore,
-            johnsTotal = 0,
-            mikesTotal = 0,
-            marysTotal = 0,
-            gamesPlayed = 3;
+            bills = [124, 46, 268],
+            tips = [],
+            finals = [];
 
-        const
-            johns = [89, 100, 173],
-            mikes = [116, 94, 193],
-            marys = [197, 134, 155];
-
-
-        johns.forEach((elem) => johnsTotal += elem);
-
-        mikes.forEach((elem) => mikesTotal += elem);
-
-        marys.forEach((elem) => marysTotal += elem);
-
-
-        johnsTotal = johnsTotal / 3;
-
-        mikesTotal = mikesTotal / 3;
-
-        marysTotal = marysTotal / 3;
-
-
-        switch (true) {
-            case johnsTotal > mikesTotal && johnsTotal > marysTotal:
-                winner = 'John';
-                winnerScore = johnsTotal;
-                break;
-            case mikesTotal > johnsTotal && mikesTotal > marysTotal:
-                winner = 'Mike'
-                winnerScore = mikesTotal;
-                break;
-            case marysTotal > johnsTotal && marysTotal > mikesTotal:
-                winner = 'Mary'
-                winnerScore = marysTotal;
-                break;
-            default:
-                break;
+        const calculateTip = (bill) => {
+            switch (true) {
+                case bill < 50:
+                    return bill * .2;
+                case bill <= 200:
+                    return bill * .15;
+                default:
+                    return bill * .1;
+            }
         }
 
-        winnerScore = winnerScore.toFixed();
+        bills.forEach((bill) => {
+            tips.push(calculateTip(bill).toFixed());
+            finals.push(bill + calculateTip(bill));
+        });
 
-
-        winner ?
-            console.log(winner + ' is a winner! His score is ' + winnerScore + ' points.') :
-            console.log('It\'s a draw!');
+        console.log(tips, finals);
     </script>
 
 </body>
