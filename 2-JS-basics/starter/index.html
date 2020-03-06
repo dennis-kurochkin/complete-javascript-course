@@ -119,32 +119,26 @@
         let people = [{
                 'name': 'Mark',
                 'mass': 60,
-                'height': 175,
+                'height': 1.75,
                 'calcBMI': function () {
-                    let bmi = this.mass / (this.height * this.height);
-                    this.bmi = bmi;
-                    return bmi;
+                    this.bmi = this.mass / (this.height * this.height);
+                    return this.bmi;
                 }
             },
             {
                 'name': 'John',
                 'mass': 60,
-                'height': 180,
+                'height': 1.70,
                 'calcBMI': function () {
-                    let bmi = this.mass / (this.height * this.height);
-                    this.bmi = bmi;
-                    return bmi;
+                    this.bmi = this.mass / (this.height * this.height);
+                    return this.bmi;
                 }
             }
         ];
 
-        people.forEach(elem => {
-            elem.calcBMI();
-        });
-
-        if (people[0].bmi > people[1].bmi) {
+        if (people[0].calcBMI() > people[1].calcBMI()) {
             console.log('Mark has the highest');
-        } else if (people[1].bmi > people[0].bmi) {
+        } else if (people[1].calcBMI() > people[0].calcBMI()) {
             console.log('John has the highest');
         } else {
             console.log('The\'re same!');
