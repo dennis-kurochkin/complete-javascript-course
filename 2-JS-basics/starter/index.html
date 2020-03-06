@@ -148,7 +148,7 @@
     <h2>5th Challenge</h2>
 
     <script>
-        const bills = {
+        const johnsBills = {
             'billsValues': [124, 48, 268, 180, 42],
             'tips': [],
             'finals': [],
@@ -168,9 +168,40 @@
             }
         }
 
-        bills.calcIt();
+        const marksBills = {
+            'billsValues': [77, 375, 110, 45],
+            'tips': [],
+            'finals': [],
+            'calcIt': function () {
+                this.billsValues.forEach(elem => {
+                    let rate = .25
 
-        console.log(bills);
+                    if (elem < 100) {
+                        rate = .2;
+                    } else if (elem <= 300) {
+                        rate = .10;
+                    }
+
+                    this.tips.push(elem * rate);
+                    this.finals.push(elem + (elem * rate));
+                });
+            }
+        }
+
+        // Function
+
+        const calcAvg = (tipsArr) => {
+            return tipsArr.reduce((sum, elem) => sum + elem) / tipsArr.length;
+        };
+
+        johnsBills.calcIt();
+        marksBills.calcIt();
+
+        johnsBills.avg = calcAvg(johnsBills.tips);
+        marksBills.avg = calcAvg(marksBills.tips);
+
+        console.log(johnsBills, marksBills);
+        console.log(johnsBills.avg > marksBills.avg ? 'John payed more' : 'Mark payed more');
     </script>
 
 </body>
