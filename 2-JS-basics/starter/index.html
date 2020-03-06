@@ -116,33 +116,61 @@
     <h2>4th Challenge</h2>
 
     <script>
-        let people = [{
-                'name': 'Mark',
-                'mass': 60,
-                'height': 1.75,
-                'calcBMI': function () {
-                    this.bmi = this.mass / (this.height * this.height);
-                    return this.bmi;
-                }
-            },
-            {
-                'name': 'John',
-                'mass': 60,
-                'height': 1.70,
-                'calcBMI': function () {
-                    this.bmi = this.mass / (this.height * this.height);
-                    return this.bmi;
-                }
-            }
-        ];
+        // let people = [{
+        //         'name': 'Mark',
+        //         'mass': 60,
+        //         'height': 1.75,
+        //         'calcBMI': function () {
+        //             this.bmi = this.mass / (this.height * this.height);
+        //             return this.bmi;
+        //         }
+        //     },
+        //     {
+        //         'name': 'John',
+        //         'mass': 60,
+        //         'height': 1.70,
+        //         'calcBMI': function () {
+        //             this.bmi = this.mass / (this.height * this.height);
+        //             return this.bmi;
+        //         }
+        //     }
+        // ];
 
-        if (people[0].calcBMI() > people[1].calcBMI()) {
-            console.log('Mark has the highest');
-        } else if (people[1].calcBMI() > people[0].calcBMI()) {
-            console.log('John has the highest');
-        } else {
-            console.log('The\'re same!');
+        // if (people[0].calcBMI() > people[1].calcBMI()) {
+        //     console.log('Mark has the highest');
+        // } else if (people[1].calcBMI() > people[0].calcBMI()) {
+        //     console.log('John has the highest');
+        // } else {
+        //     console.log('The\'re same!');
+        // }
+    </script>
+
+    <h2>5th Challenge</h2>
+
+    <script>
+        const bills = {
+            'billsValues': [124, 48, 268, 180, 42],
+            'tips': [],
+            'finals': [],
+            'calcIt': function () {
+                this.billsValues.forEach(elem => {
+                    let rate = .1
+
+                    if (elem < 50) {
+                        rate = .2;
+                    } else if (elem <= 200) {
+                        rate = .15;
+                    }
+
+                    this.tips.push(elem * rate);
+                    this.finals.push(elem + (elem * rate));
+                });
+            }
         }
+
+        bills.calcIt();
+
+        console.log(bills);
     </script>
 
 </body>
