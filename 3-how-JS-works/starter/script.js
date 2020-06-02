@@ -1,17 +1,26 @@
 ///////////////////////////////////////
 // Lecture: Hoisting
 
-var a, b, c;
-a = 1;
-b = 10;
-c = 100;
+// calculateAge(1991);
 
-console.log(b - a >= c);
+function calculateAge(year) {
+    console.log(2020 - year);
+}
 
-
-
+// calculateAge(1991);
 
 
+// retirement(1990);
+
+var retirement = function(year) {
+    console.log(65 - (2020 - year));
+}
+
+// retirement(1990);
+
+console.log(age);
+var age = 23;
+console.log(age);
 
 
 
