@@ -1,10 +1,38 @@
 (function () {
 
+    /**
+     * Question Class
+     */
+
     var Question = function (question, answers, correctAnswer) {
         this.question = question;
         this.answers = answers;
         this.correctAnswer = correctAnswer;
     }
+
+    Question.prototype.show = function () {
+        console.log(this.question);
+
+        this.answers.forEach((answer, index) => {
+            console.log(`[${index}] ${answer}`);
+        });
+    }
+
+    Question.prototype.check = function (userAnswer) {
+        return userAnswer == this.correctAnswer;
+    }
+
+    /**
+     * Helper Functions
+     */
+
+    function getRandomQuestion(questions) {
+        return questions[Math.floor(Math.random() * questions.length)];
+    }
+
+    /**
+     * Execution
+     */
 
     var questions = [
         new Question(
@@ -36,16 +64,27 @@
         )
     ]
 
-    var questionNumber = Math.floor(Math.random() * questions.length)
-    var question = questions[questionNumber];
+    var question = getRandomQuestion(questions);
+    var answer = '';
+    var score = 0;
 
-    console.log(question.question);
+    do {
+        question.show();
 
-    question.answers.forEach((answer, index) => {
-        console.log(`[${index}] ${answer}`);
-    });
+        answer = prompt('Your answer:');
 
-    prompt('Your answer:') == question.correctAnswer ?
-        console.log('You\'re right!') : console.log('You\'re wrong!');
+        if (answer === 'exit') {
+            break;
+        } else if (question.check(answer)) {
+            score++;
+            console.log(`You\'re correct! Your score is ${score}. Next question...`)
+            question = getRandomQuestion(questions);
+        } else {
+            console.log('You\'re wrong! Try that one again...');
+        }
+    }
+    while (answer !== 'exit');
+
+    console.log('You\'re out!');
 
 })();
