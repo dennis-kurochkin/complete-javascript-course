@@ -84,6 +84,7 @@ var UIController = (function () {
         value: document.querySelector(DOMStrings.inputValue).value
       }
     },
+    // Add item to the exp or inc list
     addListItem: function (obj, type) {
       var html, newHtml, insertElement;
 
@@ -131,6 +132,14 @@ var UIController = (function () {
       document.querySelector(insertElement).insertAdjacentHTML('beforeend', newHtml);
 
     },
+    // Clear input fields
+    clearInputFields: function () {
+      document
+        .querySelectorAll(`${DOMStrings.inputDescription}, ${DOMStrings.inputValue}`)
+        .forEach(function (input) {
+          input.value = '';
+        });
+    },
     getDOMStrings: function () {
       return DOMStrings;
     }
@@ -168,7 +177,7 @@ var controller = (function (budgetCtrl, UICtrl) {
 
     // Add item to the UI
     UICtrl.addListItem(newItem, input.type);
-
+    UICtrl.clearInputFields();
 
     // Calculate tht budget
 
