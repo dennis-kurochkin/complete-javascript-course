@@ -139,6 +139,8 @@ var UIController = (function () {
         .forEach(function (input) {
           input.value = '';
         });
+
+      document.querySelector(DOMStrings.inputDescription).focus();
     },
     getDOMStrings: function () {
       return DOMStrings;
