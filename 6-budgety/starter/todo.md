@@ -4,5 +4,5 @@
 
 ## Lesson 13
 
-- [ ] Update the budget controller
 - [x] Fix input data types
+- [x] Add validation
