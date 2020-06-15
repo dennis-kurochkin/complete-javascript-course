@@ -52,6 +52,12 @@ var budgetController = (function () {
       // Return new item
       return newItem;
     },
+    // Function to update total within a value
+    updateTotal: function (type, val) {
+      data.totals[type] += val;
+
+      return data.totals[type];
+    },
     // Function to test data
     testing: function () {
       console.log(data);
@@ -81,7 +87,7 @@ var UIController = (function () {
       return {
         type: document.querySelector(DOMStrings.inputType).value,
         description: document.querySelector(DOMStrings.inputDescription).value,
-        value: document.querySelector(DOMStrings.inputValue).value
+        value: parseFloat(document.querySelector(DOMStrings.inputValue).value)
       }
     },
     // Add item to the exp or inc list
@@ -165,8 +171,16 @@ var controller = (function (budgetCtrl, UICtrl) {
         ctrlAddItemHandler();
       }
     });
-  };
+  }
 
+  var updateBudget = function () {
+    // Calculate the budget
+
+    // Return budget
+
+    // Display the budget on the UI
+
+  }
 
   var ctrlAddItemHandler = function () {
     var input, newItem, newItemType;
@@ -181,11 +195,8 @@ var controller = (function (budgetCtrl, UICtrl) {
     UICtrl.addListItem(newItem, input.type);
     UICtrl.clearInputFields();
 
-    // Calculate tht budget
-
-    // Display the budget on the UI
-
-    return input;
+    // Calculate and update budget
+    updateBudget();
   };
 
   return {
