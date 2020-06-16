@@ -16,6 +16,17 @@ var budgetController = (function () {
     this.value = value;
   };
 
+  // Calculate total
+  var calculateTotal = function (type) {
+    var total = 0;
+
+    data.allItems[type].forEach(function (elem) {
+      total += elem.value;
+    });
+
+    data.totals[type] = total;
+  };
+
   // Data structure
   var data = {
     allItems: {
@@ -25,7 +36,9 @@ var budgetController = (function () {
     totals: {
       exp: 0,
       inc: 0
-    }
+    },
+    budget: 0,
+    spentPercentage: -1
   }
 
   return {
@@ -52,11 +65,29 @@ var budgetController = (function () {
       // Return new item
       return newItem;
     },
-    // Function to update total within a value
-    updateTotal: function (type, val) {
-      data.totals[type] += val;
+    // Function to calculate budget data
+    calculateBudget: function () {
 
-      return data.totals[type];
+      // Calculate totals
+      calculateTotal('exp');
+      calculateTotal('inc');
+
+      // Calculate the budget: income - expenses
+      data.budget = data.totals.inc - data.totals.exp;
+
+      // Calculate the percentage of income user spent
+      if (data.totals.inc > 0)
+        data.spentPercentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+
+    },
+    // Get budget
+    getBudget: function () {
+      return {
+        budget: data.budget,
+        totalInc: data.totals.inc,
+        totalExp: data.totals.exp,
+        spentPercentage: data.spentPercentage
+      }
     },
     // Function to test data
     testing: function () {
@@ -175,11 +206,15 @@ var controller = (function (budgetCtrl, UICtrl) {
   }
 
   var updateBudget = function () {
+
     // Calculate the budget
+    budgetCtrl.calculateBudget();
 
     // Return budget
+    var budget = budgetController.getBudget();
 
     // Display the budget on the UI
+    console.log(budget);
 
   }
 

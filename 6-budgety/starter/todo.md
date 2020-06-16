@@ -6,3 +6,9 @@
 
 - [x] Fix input data types
 - [x] Add validation
+
+## Lesson 14
+
+- [x] Program calculating budget
+
+## Lesson 15
