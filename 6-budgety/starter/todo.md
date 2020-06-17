@@ -12,3 +12,5 @@
 - [x] Program calculating budget
 
 ## Lesson 15
+
+- [ ] Update budget on UI

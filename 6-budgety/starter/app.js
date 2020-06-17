@@ -104,12 +104,20 @@ var budgetController = (function () {
 var UIController = (function () {
 
   var DOMStrings = {
+    // Top budget panel
+    budget: '.budget__value',
+    budgetIncome: '.budget__income--value',
+    budgetExpenses: '.budget__expenses--value',
+    budgetSpentPercentage: '.budget__expenses--percentage',
+    // User inputs
     inputType: '.add__type',
     inputDescription: '.add__description',
     inputValue: '.add__value',
     addBtn: '.add__btn',
+    // Lists
     incomeList: '.income__list',
     expenseList: '.expenses__list',
+
   }
 
   return {
@@ -179,6 +187,18 @@ var UIController = (function () {
 
       document.querySelector(DOMStrings.inputDescription).focus();
     },
+    // Display budget
+    displayBudget: function (data) {
+      document.querySelector(DOMStrings.budget).textContent = data.budget;
+      document.querySelector(DOMStrings.budgetIncome).textContent = data.totalInc;
+      document.querySelector(DOMStrings.budgetExpenses).textContent = data.totalExp;
+
+      if (data.spentPercentage > 0) {
+        document.querySelector(DOMStrings.budgetSpentPercentage).textContent = data.spentPercentage + '%';
+      } else {
+        document.querySelector(DOMStrings.budgetSpentPercentage).textContent = '--';
+      }
+    },
     // Get DOM strings
     getDOMStrings: function () {
       return DOMStrings;
@@ -206,6 +226,7 @@ var controller = (function (budgetCtrl, UICtrl) {
   }
 
   var updateBudget = function () {
+    var DOMStrings = UICtrl.getDOMStrings();
 
     // Calculate the budget
     budgetCtrl.calculateBudget();
@@ -214,7 +235,7 @@ var controller = (function (budgetCtrl, UICtrl) {
     var budget = budgetController.getBudget();
 
     // Display the budget on the UI
-    console.log(budget);
+    UICtrl.displayBudget(budget);
 
   }
 
@@ -239,6 +260,12 @@ var controller = (function (budgetCtrl, UICtrl) {
 
   return {
     init: function () {
+      UICtrl.displayBudget({
+        budget: 0,
+        totalInc: 0,
+        totalExp: 0,
+        spentPercentage: -1
+      });
       setUpEventListeners();
     }
   }
