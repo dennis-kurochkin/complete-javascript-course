@@ -13,4 +13,8 @@
 
 ## Lesson 15
 
-- [ ] Update budget on UI
+- [x] Update budget on UI
+
+## Lesson 19
+
+- [ ]
