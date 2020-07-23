@@ -132,8 +132,9 @@ var UIController = (function () {
     incomeList: '.income__list',
     expenseList: '.expenses__list',
     // Container
-    container: '.container'
-
+    container: '.container',
+    // Month
+    month: '.budget__title--month'
   }
 
   return {
@@ -193,6 +194,7 @@ var UIController = (function () {
       document.querySelector(insertElement).insertAdjacentHTML('beforeend', newHtml);
 
     },
+    // Delete list item
     deleteListItem: function (type, id) {
       var list;
 
@@ -225,6 +227,27 @@ var UIController = (function () {
     // Get DOM strings
     getDOMStrings: function () {
       return DOMStrings;
+    },
+    // Set current month
+    setCurrentMonthAndYear: function () {
+      var months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ];
+
+      var monthNumber = new Date().getMonth();
+
+      document.querySelector(DOMStrings.month).textContent = months[monthNumber] + ' ' + new Date().getFullYear();
     }
   }
 
@@ -238,6 +261,8 @@ var controller = (function (budgetCtrl, UICtrl) {
 
   var setUpEventListeners = function () {
     var DOMStrings = UICtrl.getDOMStrings();
+
+    UICtrl.setCurrentMonthAndYear();
 
     document.querySelector(DOMStrings.addBtn).addEventListener('click', ctrlAddItemHandler);
 
