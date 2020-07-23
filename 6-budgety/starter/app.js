@@ -104,7 +104,7 @@ var budgetController = (function () {
       }
     },
     // Function to test data
-    testing: function () {
+    logData: function () {
       console.log(data);
     }
   }
@@ -285,7 +285,7 @@ var controller = (function (budgetCtrl, UICtrl) {
   };
 
   var ctrlDeleteItemHandler = function (event) {
-    var itemID, splitID, type, id;
+    var itemID, splitID, type, id, budget;
 
     itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
 
@@ -304,6 +304,11 @@ var controller = (function (budgetCtrl, UICtrl) {
       UICtrl.deleteListItem(type, id);
 
       // Update budget
+      budgetCtrl.calculateBudget();
+
+      budget = budgetCtrl.getBudget();
+
+      UICtrl.displayBudget(budget);
 
     }
   };
