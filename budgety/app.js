@@ -154,6 +154,19 @@ var UIController = (function () {
     expensesPercentageLabel: '.item__percentage'
   }
 
+  // Format number for budget look
+  var formatNumber = function (numberToFormat) {
+    var
+      formattedNumber = Math.abs(numberToFormat).toFixed(2),
+      splittedNumber = formattedNumber.split('.'),
+      intPart = splittedNumber[0],
+      decPart = splittedNumber[1];
+
+    return intPart.length > 3 ?
+      intPart.substr(0, intPart.length - 3) + ',' + intPart.substr(intPart.length - 3, 3) + '.' + decPart :
+      formattedNumber;
+  }
+
   return {
 
     // Get user input values as an object
@@ -195,7 +208,7 @@ var UIController = (function () {
         html += "  <div class='item__description'>%description%</div>";
         html += "  <div class='right clearfix'>";
         html += "    <div class='item__value'>- %value%</div>";
-        html += "    <div class='item__percentage'>21%</div>";
+        html += "    <div class='item__percentage'>0%</div>";
         html += "    <div class='item__delete'>";
         html += "      <button class='item__delete--btn'><i class='ion-ios-close-outline'></i></button>";
         html += "    </div>";
@@ -207,7 +220,7 @@ var UIController = (function () {
       // Replace the placeholder text with some actual data
       newHtml = html.replace('%id%', obj.id);
       newHtml = newHtml.replace('%description%', obj.description);
-      newHtml = newHtml.replace('%value%', obj.value);
+      newHtml = newHtml.replace('%value%', formatNumber(obj.value));
 
       // Insert the HTML to the DOM
       document.querySelector(insertElement).insertAdjacentHTML('beforeend', newHtml);
@@ -236,9 +249,9 @@ var UIController = (function () {
 
     // Display budget
     displayBudget: function (data) {
-      document.querySelector(DOMElements.budget).textContent = data.budget;
-      document.querySelector(DOMElements.budgetIncome).textContent = data.totalInc;
-      document.querySelector(DOMElements.budgetExpenses).textContent = data.totalExp;
+      document.querySelector(DOMElements.budget).textContent = formatNumber(data.budget);
+      document.querySelector(DOMElements.budgetIncome).textContent = formatNumber(data.totalInc);
+      document.querySelector(DOMElements.budgetExpenses).textContent = formatNumber(data.totalExp);
 
       if (data.spentPercentage > 0) {
         document.querySelector(DOMElements.budgetSpentPercentage).textContent = data.spentPercentage + '%';
