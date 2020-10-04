@@ -274,6 +274,22 @@ var UIController = (function () {
       return DOMElements;
     },
 
+    changedTypeHandler: function (e) {
+      var
+        inputsToChange =
+          document.querySelectorAll(
+            `${DOMElements.inputType}, ${DOMElements.inputDescription}, ${DOMElements.inputValue}`
+          ),
+        btnToChange = document.querySelector(DOMElements.addBtn);
+
+        inputsToChange.forEach(function (elem) {
+          elem.classList.toggle('red-focus');
+        });
+
+        btnToChange.classList.toggle('red');
+
+    },
+
     // Set current month
     setCurrentMonthAndYear: function () {
       var
@@ -308,9 +324,10 @@ var UIController = (function () {
 var controller = (function (budgetCtrl, UICtrl) {
 
   var setUpEventListeners = function () {
-    var DOMStrings = UICtrl.getDOMStrings();
 
-    document.querySelector(DOMStrings.addBtn).addEventListener('click', ctrlAddItemHandler);
+    var DOMElements = UICtrl.getDOMStrings();
+
+    document.querySelector(DOMElements.addBtn).addEventListener('click', ctrlAddItemHandler);
 
     document.addEventListener('keypress', function (event) {
       if (event.keyCode === 13 || event.which === 13 || event.key === 'Enter') {
@@ -318,7 +335,9 @@ var controller = (function (budgetCtrl, UICtrl) {
       }
     });
 
-    document.querySelector(DOMStrings.container).addEventListener('click', ctrlDeleteItemHandler);
+    document.querySelector(DOMElements.container).addEventListener('click', ctrlDeleteItemHandler);
+
+    document.querySelector(DOMElements.inputType).addEventListener('change', UICtrl.changedTypeHandler);
 
   }
 
