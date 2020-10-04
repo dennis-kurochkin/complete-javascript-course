@@ -276,24 +276,26 @@ var UIController = (function () {
 
     // Set current month
     setCurrentMonthAndYear: function () {
-      var months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ];
+      var
+        months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
+        ],
+        today = new Date();
 
-      var monthNumber = new Date().getMonth();
-
-      document.querySelector(DOMElements.month).textContent = months[monthNumber] + ' ' + new Date().getFullYear();
+      document
+        .querySelector(DOMElements.month)
+        .textContent = months[today.getMonth()] + ' ' + today.getFullYear();
     }
 
   }
