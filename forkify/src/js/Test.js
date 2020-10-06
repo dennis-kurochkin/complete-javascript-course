@@ -1,0 +1,1 @@
+export default 'Module have been exported';

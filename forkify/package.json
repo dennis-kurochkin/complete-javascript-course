@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "forkify project",
   "main": "index.js",
+  "scripts": {
+    "dev": "npx webpack --mode development",
+    "build": "npx webpack --mode production"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dennis-kurochkin/complete-javascript-course"
@@ -10,9 +14,10 @@
   "bugs": {
     "url": "https://github.com/dennis-kurochkin/complete-javascript-course/issues"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Dennis Kurochkin <dennis.kurochkin@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
 }

@@ -1,1 +1,3 @@
-// Global app controller
+import x from './Test';
+
+console.log(x);
