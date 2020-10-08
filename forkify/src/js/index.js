@@ -1,19 +1,31 @@
-import axios from 'axios';
+import Search from './models/Search';
 
-async function getResults(query) {
-  const apiKey = '6522c1a90ff64af48ed047a91ad84c99';
-
-  try {
-    const result = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`);
-    const recipes = result.data.results;
-    console.log(recipes);
-  } catch (error) {
-    alert(error);
-  }
+/** Global state of the app (store)
+ * - Search object
+ * - Current recipe object
+ * - Shopping list object
+ * - Liked recipes
+ */
+const store = {
 
 }
 
-getResults('potato');
+const searchSubmitHandler = async e => {
+  e.preventDefault();
 
-// API key 6522c1a90ff64af48ed047a91ad84c99
-// https://api.spoonacular.com/recipes
+  // Get query from the view
+  const query = 'pizza';
+
+  if (query) {
+    store.search = new Search(query);
+    await store.search.getResults();
+
+    console.log(store.search.result);
+  }
+}
+
+document.querySelector('.search').addEventListener('submit', searchSubmitHandler);
+
+const search = new Search('pizza');
+
+search.getResults()
