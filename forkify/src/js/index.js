@@ -1,5 +1,5 @@
 import Search from './models/Search';
-import { elements } from './views/base';
+import { elements, removeLoader, renderLoader } from './views/base';
 import * as searchView from './views/searchView';
 
 /** Global state of the app (store)
@@ -19,13 +19,21 @@ const searchSubmitHandler = async e => {
   const query = searchView.getInput();
 
   if (query) {
+    // Get a search query
     store.search = new Search(query);
 
-    await store.search.getResults();
-
+    // Clear old results
     searchView.clearInput();
     searchView.clearResults();
 
+    // Add a loader
+    renderLoader(elements.searchResultsWrapper);
+
+    // Get search results
+    await store.search.getResults();
+
+    // Change state in store
+    removeLoader();
     searchView.renderResults(store.search.result);
   }
 }

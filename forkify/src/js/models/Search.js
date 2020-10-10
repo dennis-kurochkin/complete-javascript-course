@@ -14,6 +14,5 @@ export default class Search {
     } catch (error) {
       console.log(error);
     }
-
   }
 }
