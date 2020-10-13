@@ -1,6 +1,16 @@
 import { elements } from "./base";
 
-// Render a single recipe
+/**
+ * Gets input value from the search field
+ */
+export const getInput = () => elements.searchInput.value;
+
+/**
+ * Renders a recipe using given JSON data
+ * and injects it into the search results container
+ * 
+ * @param {object} recipe Recipe JSON
+ */
 const renderRecipe = recipe => {
   let recipeHTML = /*html*/`
     <li>
@@ -19,18 +29,39 @@ const renderRecipe = recipe => {
   elements.searchResultsContainer.insertAdjacentHTML('beforeend', recipeHTML);
 }
 
-// Get input value from search field
-export const getInput = () => elements.searchInput.value;
+const renderButtons = (page, resultsTotal, resultsPerPage) => {
+  const pages = Math.ceil(resultsTotal / resultsPerPage);
 
-// Render recipes in the recipes list
-export const renderResults = recipes => {
-  recipes.forEach(renderRecipe);
+  if (page === 1) {
+    
+  }
 }
 
+/**
+ * Renders recipes results in the recipes list
+ * 
+ * @param {string[]} results Received JSON recipes results
+ * @param {number} page Page number
+ * @param {number} resultsPerPage Search results per page
+ */
+export const renderResults = (results, page = 1, resultsPerPage = 5) => {
+  const
+    start = (page * resultsPerPage) - resultsPerPage,
+    end = page * resultsPerPage;
+
+  results.splice(start, end).forEach(renderRecipe);
+}
+
+/**
+ * Clears search results
+ */
 export const clearResults = () => {
   elements.searchResultsContainer.innerHTML = '';
 }
 
+/**
+ * Clears search input value
+ */
 export const clearInput = () => {
   elements.searchInput.value = '';
 }
