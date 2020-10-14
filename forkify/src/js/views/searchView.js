@@ -29,12 +29,41 @@ const renderRecipe = recipe => {
   elements.searchResultsContainer.insertAdjacentHTML('beforeend', recipeHTML);
 }
 
-const renderButtons = (page, resultsTotal, resultsPerPage) => {
-  const pages = Math.ceil(resultsTotal / resultsPerPage);
+/**
+ * Creates html for a pagination button using given parameters
+ * 
+ * @param {number} currentPage Current page number
+ * @param {string} type Type for a button. Can be 'prev' and 'next
+ */
+const createButton = (currentPage, type) => /*html*/`
+    <button class="btn-inline results__btn--${type}" data-page="${type === 'next' ? ++currentPage : --currentPage}">
+      <svg class="search__icon">
+          <use href="img/icons.svg#icon-triangle-${type === 'next' ? 'right' : 'left'}"></use>
+      </svg>
+      <span>Page ${type === 'next' ? ++currentPage : --currentPage}</span>
+    </button>`;
 
-  if (page === 1) {
-    
+/**
+ * Renders search pagination buttons
+ * 
+ * @param {number} currentPage Current pagination page
+ * @param {number} resultsTotal Results received in total
+ * @param {number} resultsPerPage Results per page
+ */
+const renderButtons = (currentPage, resultsTotal, resultsPerPage) => {
+  const pagesTotal = Math.ceil(resultsTotal / resultsPerPage);
+  let buttons;
+
+  if (currentPage === 1 && pagesTotal > 1) { // Show 'next' button only
+    buttons = createButton(currentPage, 'next');
+  } else if (currentPage < pagesTotal) { // Show both buttons
+    buttons = createButton(currentPage, 'prev');
+    buttons += createButton(currentPage, 'next');
+  } else if (currentPage === pagesTotal && pagesTotal > 1) { // Show 'prev' button only
+    buttons = createButton(currentPage, 'prev');
   }
+
+  elements.searchPaginationContainer.insertAdjacentHTML('afterbegin', buttons);
 }
 
 /**
@@ -45,11 +74,12 @@ const renderButtons = (page, resultsTotal, resultsPerPage) => {
  * @param {number} resultsPerPage Search results per page
  */
 export const renderResults = (results, page = 1, resultsPerPage = 5) => {
-  const
-    start = (page * resultsPerPage) - resultsPerPage,
-    end = page * resultsPerPage;
+  const start = (page * resultsPerPage) - resultsPerPage;
+  const end = page * resultsPerPage;
 
   results.splice(start, end).forEach(renderRecipe);
+
+  renderButtons(page, results.length, resultsPerPage);
 }
 
 /**
