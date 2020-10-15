@@ -34,7 +34,7 @@ const searchSubmitHandler = async e => {
 
     // Change state in store
     removeLoader();
-    searchView.renderResults(store.search.result);
+    searchView.renderResults(store.search.result, 3, 3);
   }
 }
 

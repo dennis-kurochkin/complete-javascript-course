@@ -36,11 +36,11 @@ const renderRecipe = recipe => {
  * @param {string} type Type for a button. Can be 'prev' and 'next
  */
 const createButton = (currentPage, type) => /*html*/`
-    <button class="btn-inline results__btn--${type}" data-page="${type === 'next' ? ++currentPage : --currentPage}">
+    <button class="btn-inline results__btn--${type}" data-page="${type === 'next' ? currentPage++ : currentPage--}">
       <svg class="search__icon">
           <use href="img/icons.svg#icon-triangle-${type === 'next' ? 'right' : 'left'}"></use>
       </svg>
-      <span>Page ${type === 'next' ? ++currentPage : --currentPage}</span>
+      <span>Page ${type === 'next' ? currentPage : currentPage}</span>
     </button>`;
 
 /**
@@ -52,7 +52,7 @@ const createButton = (currentPage, type) => /*html*/`
  */
 const renderButtons = (currentPage, resultsTotal, resultsPerPage) => {
   const pagesTotal = Math.ceil(resultsTotal / resultsPerPage);
-  let buttons;
+  let buttons = '';
 
   if (currentPage === 1 && pagesTotal > 1) { // Show 'next' button only
     buttons = createButton(currentPage, 'next');
@@ -77,7 +77,7 @@ export const renderResults = (results, page = 1, resultsPerPage = 5) => {
   const start = (page * resultsPerPage) - resultsPerPage;
   const end = page * resultsPerPage;
 
-  results.splice(start, end).forEach(renderRecipe);
+  [...results].splice(start, end).forEach(renderRecipe);
 
   renderButtons(page, results.length, resultsPerPage);
 }
