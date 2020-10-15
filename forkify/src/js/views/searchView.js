@@ -1,4 +1,4 @@
-import { elements } from "./base";
+import { elementClasses, elements } from "./base";
 
 /**
  * Gets input value from the search field
@@ -36,11 +36,11 @@ const renderRecipe = recipe => {
  * @param {string} type Type for a button. Can be 'prev' and 'next
  */
 const createButton = (currentPage, type) => /*html*/`
-    <button class="btn-inline results__btn--${type}" data-page="${type === 'next' ? currentPage++ : currentPage--}">
+    <button class="btn-inline ${elementClasses.resultsBtn} results__btn--${type}" data-page-to-go="${type === 'next' ? ++currentPage : --currentPage}">
+      <span>Page ${type === 'next' ? currentPage : currentPage}</span>
       <svg class="search__icon">
           <use href="img/icons.svg#icon-triangle-${type === 'next' ? 'right' : 'left'}"></use>
       </svg>
-      <span>Page ${type === 'next' ? currentPage : currentPage}</span>
     </button>`;
 
 /**
@@ -83,10 +83,12 @@ export const renderResults = (results, page = 1, resultsPerPage = 5) => {
 }
 
 /**
- * Clears search results
+ * Clears search results and
+ * pagination buttons
  */
 export const clearResults = () => {
   elements.searchResultsContainer.innerHTML = '';
+  elements.searchPaginationContainer.innerHTML = '';
 }
 
 /**

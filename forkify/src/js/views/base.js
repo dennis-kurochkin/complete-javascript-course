@@ -7,7 +7,8 @@ export const elements = {
 };
 
 export const elementClasses = {
-  loader: 'loader'
+  loader: 'loader',
+  resultsBtn: 'results__btn'
 }
 
 export const renderLoader = parent => {
