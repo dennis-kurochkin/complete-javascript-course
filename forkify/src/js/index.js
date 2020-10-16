@@ -1,12 +1,16 @@
 import Search from 'Models/Search';
+import Recipe from 'Models/Recipe';
 import { elementClasses, elements, removeLoader, renderLoader } from 'Views';
 import * as searchView from 'Views/searchView';
 
-/** Global state of the app (store)
+/** 
+ * Global state of the app (store)
  * - Search object
  * - Current recipe object
  * - Shopping list object
  * - Liked recipes
+ * 
+ * @constant {Object}
  */
 const store = {}
 
@@ -58,12 +62,27 @@ const paginationClickHandler = event => {
   }
 }
 
+const recipeOpenHandler = async () => {
+  const id = window.location.hash.replace('#', ''); // get url hash part
+
+  if (id) { // if id exists
+
+    store.recipe = new Recipe(id); // save recipe in the store
+
+    await store.recipe.getInfo(); // get recipe info
+
+    store.recipe.calcTime(); // calculate recipe cooking time
+
+    console.log(store.recipe);
+
+  }
+}
+
 // Add event listener for the search form submit event
 elements.searchForm.addEventListener('submit', searchSubmitHandler);
 
-// Add events listener for the pagination buttons container click, then delegate the event
+// Add event listener for the pagination buttons container click, then delegate the event
 elements.searchPaginationContainer.addEventListener('click', paginationClickHandler);
 
-const search = new Search('pizza');
-
-search.getResults();
+// Add event listener for a hash change and call the recipe open handler
+window.addEventListener('hashchange', recipeOpenHandler)
