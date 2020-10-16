@@ -1,4 +1,4 @@
-import { elementClasses, elements } from "./base";
+import { elementClasses, elements } from "Views";
 
 /**
  * Gets input value from the search field

@@ -16,6 +16,13 @@ module.exports = {
       template: path.join(__dirname, 'src', 'index.html')
     })
   ],
+  resolve: {
+    alias: {
+      App: path.resolve(__dirname, 'src/'),
+      Views: path.resolve(__dirname, 'src/js/views/'),
+      Models: path.resolve(__dirname, 'src/js/models/')
+    }
+  },
   module: {
     rules: [
       {

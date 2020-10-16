@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "App/*": ["src/*"],
+      "Views/*": ["src/js/views/*"],
+      "Models/*": ["src/js/models/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

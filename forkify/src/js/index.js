@@ -1,6 +1,6 @@
-import Search from './models/Search';
-import { elementClasses, elements, removeLoader, renderLoader } from './views/base';
-import * as searchView from './views/searchView';
+import Search from 'Models/Search';
+import { elementClasses, elements, removeLoader, renderLoader } from 'Views';
+import * as searchView from 'Views/searchView';
 
 /** Global state of the app (store)
  * - Search object
@@ -49,12 +49,12 @@ const searchSubmitHandler = async event => {
  */
 const paginationClickHandler = event => {
   const paginationButton = event.target.closest(`.${elementClasses.resultsBtn}`); // get the button
-  
-  if (paginationButton) { // check if it exists
-      const pageToGo = parseInt(paginationButton.dataset.pageToGo); // get the page to go to number
 
-      searchView.clearResults();
-      searchView.renderResults(store.search.result, pageToGo);
+  if (paginationButton) { // check if it exists
+    const pageToGo = parseInt(paginationButton.dataset.pageToGo); // get the page to go to number
+
+    searchView.clearResults();
+    searchView.renderResults(store.search.result, pageToGo);
   }
 }
 
