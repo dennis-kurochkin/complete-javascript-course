@@ -16,15 +16,16 @@ const clear = () => {
 const formatIngredientAmount = amount => {
   if (amount) {
     const [int, dec] = amount.toString().split('.').map(number => parseInt(number));
+    let fraction;
 
     switch (true) {
       case !dec:
         return amount;
       case int === 0:
-        const fraction = new Fraction(amount);
+        fraction = new Fraction(amount);
         return `${fraction.n}/${fraction.d}`;
       default:
-        const fraction = new Fraction(amount - int);
+        fraction = new Fraction(amount - int);
         return `${int} ${fraction.n}/${fraction.d}`;
     }
   } else {
