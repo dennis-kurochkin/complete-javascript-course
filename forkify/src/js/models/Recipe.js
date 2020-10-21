@@ -23,25 +23,17 @@ class Recipe {
       const result = await axios(`https://api.spoonacular.com/recipes/${this.id}/information?apiKey=${apiKey}&includeNutrition=false`);
 
       this.title = result.data.title;
-      this.source = result.data.sourceName;
       this.image = result.data.image;
+      this.sourceName = result.data.sourceName;
       this.sourceUrl = result.data.sourceUrl;
       this.extendedIngredients = result.data.extendedIngredients;
       this.readyInMinutes = result.data.readyInMinutes;
       this.servings = result.data.servings;
-
+      
+      return this;
     } catch (error) {
       throw error;
     }
-
-    return this;
-  }
-
-  /**
-   * Function to assume cooking time based on amount of ingredients
-   */
-  calcTime() {
-    this.readyInMinutesAssumed = Math.ceil(this.ingredients.length % 3) * 15;
   }
 }
 

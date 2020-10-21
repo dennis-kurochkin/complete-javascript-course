@@ -3,7 +3,8 @@ export const elements = {
   searchForm: document.querySelector('.search'),
   searchResultsContainer: document.querySelector('.results__list'),
   searchResultsWrapper: document.querySelector('.results'),
-  searchPaginationContainer: document.querySelector('.results__pages')
+  searchPaginationContainer: document.querySelector('.results__pages'),
+  recipe: document.querySelector('.recipe')
 };
 
 export const elementClasses = {

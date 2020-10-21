@@ -2,6 +2,7 @@ import Search from 'Models/Search';
 import Recipe from 'Models/Recipe';
 import { elementClasses, elements, removeLoader, renderLoader } from 'Views';
 import * as searchView from 'Views/searchView';
+import * as recipeView from 'Views/recipeView';
 
 /** 
  * Global state of the app (store)
@@ -80,8 +81,13 @@ const recipeOpenHandler = async () => {
     state.recipe = new Recipe(id); // save recipe in the store
 
     try {
+      recipeView.clear();
+      renderLoader(elements.recipe)
+
       await state.recipe.getInfo(); // get recipe info
-      state.recipe.calcTime(); // calculate recipe cooking time
+
+      removeLoader();
+      recipeView.renderRecipe(state.recipe);
     } catch (error) {
         throw error;
     }

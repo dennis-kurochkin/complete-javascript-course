@@ -3,7 +3,7 @@ import { elementClasses, elements } from "Views";
 /**
  * Gets input value from the search field
  */
-export const getInput = () => elements.searchInput.value;
+const getInput = () => elements.searchInput.value;
 
 /**
  * Renders a recipe using given JSON data
@@ -73,7 +73,7 @@ const renderButtons = (currentPage, resultsTotal, resultsPerPage) => {
  * @param {number} page Page number
  * @param {number} resultsPerPage Search results per page
  */
-export const renderResults = (results, page = 1, resultsPerPage = 5) => {
+const renderResults = (results, page = 1, resultsPerPage = 5) => {
   const start = (page * resultsPerPage) - resultsPerPage;
   const end = page * resultsPerPage;
 
@@ -86,7 +86,7 @@ export const renderResults = (results, page = 1, resultsPerPage = 5) => {
  * Clears search results and
  * pagination buttons
  */
-export const clearResults = () => {
+const clearResults = () => {
   elements.searchResultsContainer.innerHTML = '';
   elements.searchPaginationContainer.innerHTML = '';
 }
@@ -94,6 +94,8 @@ export const clearResults = () => {
 /**
  * Clears search input value
  */
-export const clearInput = () => {
+const clearInput = () => {
   elements.searchInput.value = '';
 }
+
+export { getInput, renderResults, clearResults, clearInput };
