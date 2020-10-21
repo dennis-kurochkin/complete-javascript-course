@@ -1,4 +1,8 @@
-export const elements = {
+/**
+ * DOM elements
+ * @constant
+ */
+const elements = {
   searchInput: document.querySelector('.search__field'),
   searchForm: document.querySelector('.search'),
   searchResultsContainer: document.querySelector('.results__list'),
@@ -7,12 +11,22 @@ export const elements = {
   recipe: document.querySelector('.recipe')
 };
 
-export const elementClasses = {
+/**
+ * DOM elements classes
+ * @constant  
+  */
+const elementClasses = {
   loader: 'loader',
-  resultsBtn: 'results__btn'
+  resultsBtn: 'results__btn',
+  resultsLink: 'results__link',
+  activeResultsLink: 'results__link--active'
 }
 
-export const renderLoader = parent => {
+/**
+ * Renders loader in a parent element.
+ * @param {Element} parent Parent element which will contain a loader
+ */
+const renderLoader = parent => {
   const loader = /*html*/`
     <div class="${elementClasses.loader}">
       <svg>
@@ -24,8 +38,13 @@ export const renderLoader = parent => {
   parent.insertAdjacentHTML('afterbegin', loader);
 }
 
-export const removeLoader = () => {
+/**
+ * Removes loader.
+ */
+const removeLoader = () => {
   const loader = document.querySelector(`.${elementClasses.loader}`);
 
   if (loader) loader.parentElement.removeChild(loader);
 }
+
+export { elements, elementClasses, renderLoader, removeLoader };

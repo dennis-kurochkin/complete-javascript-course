@@ -83,6 +83,23 @@ const renderResults = (results, page = 1, resultsPerPage = 5) => {
 }
 
 /**
+ * Highlights recipe with given ID in search results.
+ * @param {number} recipeID ID of the recipe result to highlight
+ */
+const highlightSelectedRecipe = recipeID => {
+  const recipe = document.querySelector(`.${elementClasses.resultsLink}[href="#${recipeID}"]`)
+  if (recipe) recipe.classList.add(elementClasses.activeResultsLink);
+}
+
+/**
+ * Clears previously selected highlighted recipe.
+ */
+const clearHighlightedRecipe = () => {
+  const recipe = document.querySelector(`.${elementClasses.activeResultsLink}`);
+  if (recipe) recipe.classList.remove(elementClasses.activeResultsLink);
+}
+
+/**
  * Clears search results and
  * pagination buttons
  */
@@ -98,4 +115,11 @@ const clearInput = () => {
   elements.searchInput.value = '';
 }
 
-export { getInput, renderResults, clearResults, clearInput };
+export {
+  getInput,
+  renderResults,
+  highlightSelectedRecipe,
+  clearHighlightedRecipe,
+  clearResults,
+  clearInput
+};

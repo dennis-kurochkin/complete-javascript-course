@@ -84,6 +84,9 @@ const recipeOpenHandler = async () => {
       recipeView.clear();
       renderLoader(elements.recipe)
 
+      searchView.clearHighlightedRecipe(); // clear highlighted recipe
+      searchView.highlightSelectedRecipe(state.recipe.id); // highlight selected recipe
+
       await state.recipe.getInfo(); // get recipe info
 
       removeLoader();

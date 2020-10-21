@@ -11,7 +11,7 @@ const clear = () => {
 /**
  * Formats the amount of the passed ingredient.
  * @param {number} amount The amount of ingredient to format
- * @returns {string|number}
+ * @returns {string|number} Formatted ingredient amount
  */
 const formatIngredientAmount = amount => {
   if (amount) {
