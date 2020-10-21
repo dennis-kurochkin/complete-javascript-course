@@ -24,7 +24,7 @@ class Search {
 
       return this;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 }

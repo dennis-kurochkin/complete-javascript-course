@@ -25,13 +25,13 @@ class Recipe {
       this.title = result.data.title;
       this.source = result.data.sourceName;
       this.image = result.data.image;
-      this.url = result.data.sourceUrl;
-      this.ingredients = result.data.extendedIngredients;
+      this.sourceUrl = result.data.sourceUrl;
+      this.extendedIngredients = result.data.extendedIngredients;
       this.readyInMinutes = result.data.readyInMinutes;
       this.servings = result.data.servings;
 
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
 
     return this;

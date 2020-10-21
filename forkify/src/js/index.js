@@ -12,7 +12,7 @@ import * as searchView from 'Views/searchView';
  * 
  * @constant {Object}
  */
-const store = {}
+const state = {}
 
 /**
  * Handles search form submit
@@ -27,7 +27,7 @@ const searchSubmitHandler = async event => {
 
   if (query) {
     // Get a search query
-    store.search = new Search(query);
+    state.search = new Search(query);
 
     // Clear old results
     searchView.clearInput();
@@ -36,12 +36,18 @@ const searchSubmitHandler = async event => {
     // Add a loader
     renderLoader(elements.searchResultsWrapper);
 
-    // Get search results
-    await store.search.getResults();
+    try {
+      // Get search results
+      await state.search.getResults();
+  
+      // Change state in store
+      removeLoader();
+      searchView.renderResults(state.search.result);  
+    } catch (error) {
+      removeLoader();
+      throw error;
+    }
 
-    // Change state in store
-    removeLoader();
-    searchView.renderResults(store.search.result);
   }
 }
 
@@ -58,22 +64,27 @@ const paginationClickHandler = event => {
     const pageToGo = parseInt(paginationButton.dataset.pageToGo); // get the page to go to number
 
     searchView.clearResults();
-    searchView.renderResults(store.search.result, pageToGo);
+    searchView.renderResults(state.search.result, pageToGo);
   }
 }
 
+/**
+ * Handles recipe page opening via
+ * recipe card click or page redirect
+ */
 const recipeOpenHandler = async () => {
   const id = window.location.hash.replace('#', ''); // get url hash part
 
   if (id) { // if id exists
 
-    store.recipe = new Recipe(id); // save recipe in the store
+    state.recipe = new Recipe(id); // save recipe in the store
 
-    await store.recipe.getInfo(); // get recipe info
-
-    store.recipe.calcTime(); // calculate recipe cooking time
-
-    console.log(store.recipe);
+    try {
+      await state.recipe.getInfo(); // get recipe info
+      state.recipe.calcTime(); // calculate recipe cooking time
+    } catch (error) {
+        throw error;
+    }
 
   }
 }
@@ -85,4 +96,4 @@ elements.searchForm.addEventListener('submit', searchSubmitHandler);
 elements.searchPaginationContainer.addEventListener('click', paginationClickHandler);
 
 // Add event listener for a hash change and call the recipe open handler
-window.addEventListener('hashchange', recipeOpenHandler)
+['hashchange', 'load'].forEach(event => window.addEventListener(event, recipeOpenHandler));
