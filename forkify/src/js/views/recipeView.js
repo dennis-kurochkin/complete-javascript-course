@@ -8,19 +8,24 @@ const clear = () => {
   elements.recipe.innerHTML = '';
 }
 
+/**
+ * Formats the amount of the passed ingredient.
+ * @param {number} amount The amount of ingredient to format
+ * @returns {string|number}
+ */
 const formatIngredientAmount = amount => {
   if (amount) {
-    // 2.5
     const [int, dec] = amount.toString().split('.').map(number => parseInt(number));
 
-    if (!dec) return amount;
-
-    if (int === 0) {
-      const fraction = new Fraction(amount);
-      return `${fraction.n}/${fraction.d}`;
-    } else {
-      const fraction = new Fraction(amount - int);
-      return `${int} ${fraction.n}/${fraction.d}`;
+    switch (true) {
+      case !dec:
+        return amount;
+      case int === 0:
+        const fraction = new Fraction(amount);
+        return `${fraction.n}/${fraction.d}`;
+      default:
+        const fraction = new Fraction(amount - int);
+        return `${int} ${fraction.n}/${fraction.d}`;
     }
   } else {
     return 'some';
