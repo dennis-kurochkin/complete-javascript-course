@@ -1,10 +1,30 @@
 import { elements } from "./index";
+import Fraction from 'fraction.js';
 
 /**
  * Clears recipe container.
  */
 const clear = () => {
   elements.recipe.innerHTML = '';
+}
+
+const formatIngredientAmount = amount => {
+  if (amount) {
+    // 2.5
+    const [int, dec] = amount.toString().split('.').map(number => parseInt(number));
+
+    if (!dec) return amount;
+
+    if (int === 0) {
+      const fraction = new Fraction(amount);
+      return `${fraction.n}/${fraction.d}`;
+    } else {
+      const fraction = new Fraction(amount - int);
+      return `${int} ${fraction.n}/${fraction.d}`;
+    }
+  } else {
+    return 'some';
+  }
 }
 
 /**
@@ -19,7 +39,7 @@ const createIngredientHandler = ingredient => /*html*/`
       <svg class="recipe__icon">
         <use href="img/icons.svg#icon-check"></use>
       </svg>
-      <div class="recipe__count">${ingredient.amount}</div>
+      <div class="recipe__count">${formatIngredientAmount(ingredient.amount)}</div>
       <div class="recipe__ingredient">
         <span class="recipe__unit">${ingredient.unit}</span>
         ${ingredient.name}

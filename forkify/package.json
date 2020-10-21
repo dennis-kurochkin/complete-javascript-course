@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "fraction.js": "^4.0.12"
   }
 }
