@@ -49,7 +49,7 @@ const createIngredient = ingredient => /*html*/`
         ${formatIngredientAmount(ingredient.amount)}
       </div>
       <div class="recipe__ingredient">
-        <span class="recipe__unit">${ingredient.unit}</span>
+        &nbsp;<span class="recipe__unit">${ingredient.unit}</span>
         ${ingredient.name}
       </div>
     </li>`;

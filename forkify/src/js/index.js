@@ -1,5 +1,6 @@
 import Search from 'Models/Search';
 import Recipe from 'Models/Recipe';
+import ShoppingList from 'Models/ShoppingList';
 import { elementClasses, elements, removeLoader, renderLoader } from 'Views';
 import * as searchView from 'Views/searchView';
 import * as recipeView from 'Views/recipeView';
@@ -13,7 +14,9 @@ import * as recipeView from 'Views/recipeView';
  * 
  * @constant {Object}
  */
-const state = {}
+const state = {
+  shoppingList: new ShoppingList()
+}
 
 /**
  * Handles search form submit
