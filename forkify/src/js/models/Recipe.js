@@ -29,11 +29,21 @@ class Recipe {
       this.extendedIngredients = result.data.extendedIngredients;
       this.readyInMinutes = result.data.readyInMinutes;
       this.servings = result.data.servings;
-      
+
       return this;
     } catch (error) {
       throw error;
     }
+  }
+
+  changeServings(type) {
+    const updatedServings = type === 'decrease' ? this.servings - 1 : this.servings + 1;
+
+    this.extendedIngredients.forEach(ingredient => {
+      ingredient.amount *= (updatedServings / this.servings);
+    });
+
+    this.servings = updatedServings;
   }
 }
 

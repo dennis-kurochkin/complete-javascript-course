@@ -1,4 +1,4 @@
-import { elements } from "./index";
+import { elementClasses, elements } from "./index";
 import Fraction from 'fraction.js';
 
 /**
@@ -40,12 +40,14 @@ const formatIngredientAmount = amount => {
  * @param {object} ingredient 
  * @returns {string} ingredient HTML
  */
-const createIngredientHandler = ingredient => /*html*/`
-    <li class="recipe__item">
+const createIngredient = ingredient => /*html*/`
+    <li class="${elementClasses.recipeIngredient}">
       <svg class="recipe__icon">
         <use href="img/icons.svg#icon-check"></use>
       </svg>
-      <div class="recipe__count">${formatIngredientAmount(ingredient.amount)}</div>
+      <div class="${elementClasses.recipeIngredientAmount}">
+        ${formatIngredientAmount(ingredient.amount)}
+      </div>
       <div class="recipe__ingredient">
         <span class="recipe__unit">${ingredient.unit}</span>
         ${ingredient.name}
@@ -78,16 +80,16 @@ const renderRecipe = recipe => {
         <svg class="recipe__info-icon">
           <use href="img/icons.svg#icon-man"></use>
         </svg>
-        <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
+        <span class="recipe__info-data ${elementClasses.recipeServingsText}">${recipe.servings}</span>
         <span class="recipe__info-text"> servings</span>
 
         <div class="recipe__info-buttons">
-          <button class="btn-tiny">
+          <button class="btn-tiny btn-decrease">
             <svg>
               <use href="img/icons.svg#icon-circle-with-minus"></use>
             </svg>
           </button>
-          <button class="btn-tiny">
+          <button class="btn-tiny btn-increase">
             <svg>
               <use href="img/icons.svg#icon-circle-with-plus"></use>
             </svg>
@@ -103,9 +105,9 @@ const renderRecipe = recipe => {
   </div>
 
   <div class="recipe__ingredients">
-    <ul class="recipe__ingredient-list">
+    <ul class="${elementClasses.recipeIngredientsContainer}">
 
-      ${recipe.extendedIngredients.map(createIngredientHandler).join('')}
+      ${recipe.extendedIngredients.map(createIngredient).join('')}
       
     </ul>
 
@@ -134,4 +136,18 @@ const renderRecipe = recipe => {
   elements.recipe.insertAdjacentHTML('afterbegin', markup);
 }
 
-export { clear, createIngredientHandler, renderRecipe };
+/**
+ * Updates servings and ingredients in recipe UI
+ * @param {Recipe} recipe 
+ */
+const updateServingsAndIngredients = recipe => {
+  document.querySelector(`.${elementClasses.recipeServingsText}`).textContent
+    = recipe.servings;
+
+  document.querySelectorAll(`.${elementClasses.recipeIngredientAmount}`)
+    .forEach((ingredient, index) => {
+      ingredient.textContent = formatIngredientAmount(recipe.extendedIngredients[index].amount);
+    })
+}
+
+export { clear, createIngredient, renderRecipe, updateServingsAndIngredients };

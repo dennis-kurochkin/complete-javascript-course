@@ -19,7 +19,11 @@ const elementClasses = {
   loader: 'loader',
   resultsBtn: 'results__btn',
   resultsLink: 'results__link',
-  activeResultsLink: 'results__link--active'
+  activeResultsLink: 'results__link--active',
+  recipeServingsText: 'recipe__info-data--people',
+  recipeIngredientsContainer: 'recipe__ingredient-list',
+  recipeIngredient: 'recipe__item',
+  recipeIngredientAmount: 'recipe_count'
 }
 
 /**

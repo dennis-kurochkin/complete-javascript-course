@@ -40,10 +40,10 @@ const searchSubmitHandler = async event => {
     try {
       // Get search results
       await state.search.getResults();
-  
+
       // Change state in store
       removeLoader();
-      searchView.renderResults(state.search.result);  
+      searchView.renderResults(state.search.result);
     } catch (error) {
       removeLoader();
       throw error;
@@ -92,10 +92,24 @@ const recipeOpenHandler = async () => {
       removeLoader();
       recipeView.renderRecipe(state.recipe);
     } catch (error) {
-        throw error;
+      throw error;
     }
 
   }
+}
+
+/**
+ * Handles recipe servings change and updates the UI
+ * @param {Event} event 
+ */
+const changeServingsHandler = event => {
+  if (event.target.matches('.btn-decrease, .btn-decrease *') && state.recipe.servings > 1) {
+    state.recipe.changeServings('decrease');
+  } else if (event.target.matches('.btn-increase, .btn-increase *')) {
+    state.recipe.changeServings('increase');
+  }
+
+  recipeView.updateServingsAndIngredients(state.recipe);
 }
 
 // Add event listener for the search form submit event
@@ -106,3 +120,6 @@ elements.searchPaginationContainer.addEventListener('click', paginationClickHand
 
 // Add event listener for a hash change and call the recipe open handler
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, recipeOpenHandler));
+
+// Add event listener for the servings change buttons
+elements.recipe.addEventListener('click', changeServingsHandler);
