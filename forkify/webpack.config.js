@@ -20,7 +20,8 @@ module.exports = {
     alias: {
       App: path.resolve(__dirname, 'src/js/'),
       Views: path.resolve(__dirname, 'src/js/views/'),
-      Models: path.resolve(__dirname, 'src/js/models/')
+      Models: path.resolve(__dirname, 'src/js/models/'),
+      Controllers: path.resolve(__dirname, 'src/js/controllers/')
     }
   },
   module: {

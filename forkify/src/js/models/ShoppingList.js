@@ -49,6 +49,10 @@ class ShoppingList {
   getItem(id) {
     return this.items.find(item => item.id === id);
   }
+
+  hasItem(name) {
+    return this.items.findIndex(item => item.name === name) >= 0;
+  }
 }
 
 export default ShoppingList;

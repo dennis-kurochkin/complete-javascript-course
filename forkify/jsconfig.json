@@ -6,7 +6,8 @@
     "paths": {
       "App/*": ["src/js/*"],
       "Views/*": ["src/js/views/*"],
-      "Models/*": ["src/js/models/*"]
+      "Models/*": ["src/js/models/*"],
+      "Controllers/*": ["src/js/controllers/*"]
     }
   },
   "exclude": ["node_modules", "dist"]
