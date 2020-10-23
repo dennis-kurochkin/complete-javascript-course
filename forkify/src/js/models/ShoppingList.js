@@ -1,4 +1,4 @@
-import {nanoid} from 'nanoid';
+import { nanoid } from 'nanoid';
 
 /**
  * Represent a shopping list
@@ -13,10 +13,15 @@ class ShoppingList {
    * 
    * @param {number} amount 
    * @param {string} unit
-   * @param {string} ingredient 
+   * @param {string} name 
+   * @returns {object} item
    */
-  addItem(amount, unit, ingredient) {
-    this.items.push({ id: nanoid(), amount, unit, ingredient });
+  addItem(amount, unit, name) {
+    const item = { id: nanoid(), amount, unit, name };
+
+    this.items.push(item);
+
+    return item;
   }
 
   /**
@@ -34,6 +39,15 @@ class ShoppingList {
    */
   updateItemAmount(id, newAmount) {
     this.items.find(item => item.id === id).amount = newAmount;
+  }
+
+  /**
+   * Gets item from the list using given id.
+   * @param {string} id 
+   * @returns {object} shopping list item
+   */
+  getItem(id) {
+    return this.items.find(item => item.id === id);
   }
 }
 

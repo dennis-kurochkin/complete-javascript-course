@@ -8,14 +8,15 @@ const elements = {
   searchResultsContainer: document.querySelector('.results__list'),
   searchResultsWrapper: document.querySelector('.results'),
   searchPaginationContainer: document.querySelector('.results__pages'),
-  recipe: document.querySelector('.recipe')
+  recipe: document.querySelector('.recipe'),
+  shoppingList: document.querySelector('.shopping__list')
 };
 
 /**
  * DOM elements classes
  * @constant  
   */
-const elementClasses = {
+const selectors = {
   loader: 'loader',
   resultsBtn: 'results__btn',
   resultsLink: 'results__link',
@@ -23,7 +24,11 @@ const elementClasses = {
   recipeServingsText: 'recipe__info-data--people',
   recipeIngredientsContainer: 'recipe__ingredient-list',
   recipeIngredient: 'recipe__item',
-  recipeIngredientAmount: 'recipe_count'
+  recipeIngredientAmount: 'recipe_count',
+  addToListButton: 'recipe__btn',
+  listItem: 'shopping__item',
+  listItemDeleteBtn: 'shopping__delete',
+  listItemInput: 'shopping__input'
 }
 
 /**
@@ -32,7 +37,7 @@ const elementClasses = {
  */
 const renderLoader = parent => {
   const loader = /*html*/`
-    <div class="${elementClasses.loader}">
+    <div class="${selectors.loader}">
       <svg>
         <use href="img/icons.svg#icon-cw"></use>
       </svg>
@@ -46,9 +51,9 @@ const renderLoader = parent => {
  * Removes loader.
  */
 const removeLoader = () => {
-  const loader = document.querySelector(`.${elementClasses.loader}`);
+  const loader = document.querySelector(`.${selectors.loader}`);
 
   if (loader) loader.parentElement.removeChild(loader);
 }
 
-export { elements, elementClasses, renderLoader, removeLoader };
+export { elements, selectors, renderLoader, removeLoader };

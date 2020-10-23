@@ -26,7 +26,7 @@ class Recipe {
       this.image = result.data.image;
       this.sourceName = result.data.sourceName;
       this.sourceUrl = result.data.sourceUrl;
-      this.extendedIngredients = result.data.extendedIngredients;
+      this.ingredients = result.data.extendedIngredients;
       this.readyInMinutes = result.data.readyInMinutes;
       this.servings = result.data.servings;
 
@@ -39,8 +39,8 @@ class Recipe {
   changeServings(type) {
     const updatedServings = type === 'decrease' ? this.servings - 1 : this.servings + 1;
 
-    this.extendedIngredients.forEach(ingredient => {
-      ingredient.amount *= (updatedServings / this.servings);
+    this.ingredients.forEach(ingredient => {
+      ingredient.amount *= updatedServings / this.servings;
     });
 
     this.servings = updatedServings;

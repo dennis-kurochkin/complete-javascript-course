@@ -1,4 +1,4 @@
-import { elementClasses, elements } from "Views";
+import { selectors, elements } from "Views";
 
 /**
  * Gets input value from the search field
@@ -36,7 +36,7 @@ const renderRecipe = recipe => {
  * @param {string} type Type for a button. Can be 'prev' and 'next
  */
 const createButton = (currentPage, type) => /*html*/`
-    <button class="btn-inline ${elementClasses.resultsBtn} results__btn--${type}" data-page-to-go="${type === 'next' ? ++currentPage : --currentPage}">
+    <button class="btn-inline ${selectors.resultsBtn} results__btn--${type}" data-page-to-go="${type === 'next' ? ++currentPage : --currentPage}">
       <span>Page ${type === 'next' ? currentPage : currentPage}</span>
       <svg class="search__icon">
           <use href="img/icons.svg#icon-triangle-${type === 'next' ? 'right' : 'left'}"></use>
@@ -87,16 +87,16 @@ const renderResults = (results, page = 1, resultsPerPage = 5) => {
  * @param {number} recipeID ID of the recipe result to highlight
  */
 const highlightSelectedRecipe = recipeID => {
-  const recipe = document.querySelector(`.${elementClasses.resultsLink}[href="#${recipeID}"]`)
-  if (recipe) recipe.classList.add(elementClasses.activeResultsLink);
+  const recipe = document.querySelector(`.${selectors.resultsLink}[href="#${recipeID}"]`)
+  if (recipe) recipe.classList.add(selectors.activeResultsLink);
 }
 
 /**
  * Clears previously selected highlighted recipe.
  */
 const clearHighlightedRecipe = () => {
-  const recipe = document.querySelector(`.${elementClasses.activeResultsLink}`);
-  if (recipe) recipe.classList.remove(elementClasses.activeResultsLink);
+  const recipe = document.querySelector(`.${selectors.activeResultsLink}`);
+  if (recipe) recipe.classList.remove(selectors.activeResultsLink);
 }
 
 /**

@@ -1,9 +1,10 @@
 import Search from 'Models/Search';
 import Recipe from 'Models/Recipe';
 import ShoppingList from 'Models/ShoppingList';
-import { elementClasses, elements, removeLoader, renderLoader } from 'Views';
+import { selectors, elements, removeLoader, renderLoader } from 'Views/index';
 import * as searchView from 'Views/searchView';
 import * as recipeView from 'Views/recipeView';
+import * as shoppingListView from 'Views/shoppingListView';
 
 /** 
  * Global state of the app (store)
@@ -18,10 +19,12 @@ const state = {
   shoppingList: new ShoppingList()
 }
 
+window.state = state;
+
 /**
  * Handles search form submit
  * 
- * @param {Event} event Event object
+ * @param {Event} event 
  */
 const searchSubmitHandler = async event => {
   event.preventDefault();
@@ -59,10 +62,10 @@ const searchSubmitHandler = async event => {
  * Handles pagination container click event
  * and delegates it to the pagination buttons
  * 
- * @param {Event} event Event object
+ * @param {Event} event 
  */
 const paginationClickHandler = event => {
-  const paginationButton = event.target.closest(`.${elementClasses.resultsBtn}`); // get the button
+  const paginationButton = event.target.closest(`.${selectors.resultsBtn}`); // get the button
 
   if (paginationButton) { // check if it exists
     const pageToGo = parseInt(paginationButton.dataset.pageToGo); // get the page to go to number
@@ -115,6 +118,51 @@ const changeServingsHandler = event => {
   recipeView.updateServingsAndIngredients(state.recipe);
 }
 
+/**
+ * Handles adding ingredients as shopping list items.
+ * @param {Event} event 
+ */
+const addToListHandler = event => {
+  if (event.target.matches(`.${selectors.addToListButton}, .${selectors.addToListButton} *`)) {
+    state.recipe.ingredients.forEach(ingredient => {
+      if (state.shoppingList.items.findIndex(item => item.name === ingredient.name) < 0) {
+        shoppingListView.addItem(
+          state.shoppingList.addItem(ingredient.amount, ingredient.unit, ingredient.name)
+        );
+      }
+    });
+  }
+}
+
+/**
+ * Handles removing and updating the shopping list item.
+ * @param {Event} event 
+ */
+const listItemActionHandler = event => {
+  const target = event.target;
+  const id = target.closest(`.${selectors.listItem}`).dataset.id;
+
+  if (!id) return;
+
+  switch (true) {
+    // If clicked delete button
+    case target.matches(`.${selectors.listItemDeleteBtn}, .${selectors.listItemDeleteBtn} *`):
+      shoppingListView.removeItem(id);
+      state.shoppingList.removeItem(id);
+      break;
+    // If clicked input
+    case target.matches(`.${selectors.listItemInput}`):
+      if (parseFloat(target.value) > 0) {
+        state.shoppingList.updateItemAmount(id, parseFloat(target.value));
+      } else {
+        target.value = state.shoppingList.getItem(id).amount;
+      }
+      break;
+    default:
+      break;
+  }
+}
+
 // Add event listener for the search form submit event
 elements.searchForm.addEventListener('submit', searchSubmitHandler);
 
@@ -126,3 +174,9 @@ elements.searchPaginationContainer.addEventListener('click', paginationClickHand
 
 // Add event listener for the servings change buttons
 elements.recipe.addEventListener('click', changeServingsHandler);
+
+// Add event listener for add to shopping list button click
+elements.recipe.addEventListener('click', addToListHandler);
+
+// Add event listener for remove shopping item button click
+elements.shoppingList.addEventListener('click', listItemActionHandler);
