@@ -9,6 +9,7 @@ const elements = {
   searchResultsWrapper: document.querySelector('.results'),
   searchPaginationContainer: document.querySelector('.results__pages'),
   recipe: document.querySelector('.recipe'),
+  likedList: document.querySelector('.likes__list'),
   shoppingList: document.querySelector('.shopping__list')
 };
 
@@ -25,6 +26,7 @@ const selectors = {
   recipeIngredientsContainer: 'recipe__ingredient-list',
   recipeIngredient: 'recipe__item',
   recipeIngredientAmount: 'recipe_count',
+  likeButton: 'recipe__love',
   addToListButton: 'recipe__btn',
   listItem: 'shopping__item',
   listItemDeleteBtn: 'shopping__delete',

@@ -36,6 +36,10 @@ class Recipe {
     }
   }
 
+  /**
+   * Changes servings in Recipe
+   * @param {string} type action type, decrease or increase
+   */
   changeServings(type) {
     const updatedServings = type === 'decrease' ? this.servings - 1 : this.servings + 1;
 

@@ -1,5 +1,6 @@
 import Recipe from 'Models/Recipe';
 import ShoppingList from 'Models/ShoppingList';
+import LikedList from 'Models/LikedList';
 import { elements, removeLoader, renderLoader } from 'Views/index';
 import * as searchView from 'Views/searchView';
 import * as recipeView from 'Views/recipeView';
@@ -17,8 +18,11 @@ import * as shoppingListController from 'Controllers/shoppingListController';
  * @constant {Object}
  */
 const state = {
-  shoppingList: new ShoppingList()
+  shoppingList: new ShoppingList(),
+  likedList: new LikedList()
 }
+
+window.state = state;
 
 /**
  * Handles recipe page opening via
@@ -41,7 +45,7 @@ const recipeOpenHandler = async () => {
       await state.recipe.getInfo(); // get recipe info
 
       removeLoader();
-      recipeView.renderRecipe(state.recipe);
+      recipeView.renderRecipe(state.recipe, state.likedList.isLiked(id));
     } catch (error) {
       throw error;
     }
