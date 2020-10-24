@@ -54,6 +54,7 @@ const recipeOpenHandler = async () => {
   }
 }
 
+// Add event listener for a window load and restore data from storage
 window.addEventListener('load', () => {
   likedListController.initLikedList();
   searchController.initSearch();

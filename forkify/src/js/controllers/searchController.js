@@ -59,9 +59,12 @@ const searchSubmitHandler = async event => {
   }
 }
 
+/**
+ * Inits last search results on page load.
+ */
 const initSearch = async () => {
   const query = retrieveQuery();
-  
+
   if (query && query.length > 0) {
     // Get a search query
     state.search = new Search(query);
