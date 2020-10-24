@@ -1,3 +1,4 @@
+import { getLimitedTitle } from "App/helpers/index";
 import { selectors, elements } from "Views";
 
 /**
@@ -19,7 +20,7 @@ const renderRecipe = recipe => {
           <img src="${recipe.image}" alt="${recipe.title}">
         </figure>
         <div class="results__data">
-          <h4 class="results__name">${recipe.title}</h4>
+          <h4 class="results__name">${getLimitedTitle(recipe.title)}</h4>
           <p class="results__author">${recipe.sourceName}</p>
         </div>
       </a>

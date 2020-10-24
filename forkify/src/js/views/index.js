@@ -10,13 +10,14 @@ const elements = {
   searchPaginationContainer: document.querySelector('.results__pages'),
   recipe: document.querySelector('.recipe'),
   likedList: document.querySelector('.likes__list'),
+  likedMenu: document.querySelector('.likes__field'),
   shoppingList: document.querySelector('.shopping__list')
 };
 
 /**
  * DOM elements classes
  * @constant  
-  */
+ */
 const selectors = {
   loader: 'loader',
   resultsBtn: 'results__btn',
