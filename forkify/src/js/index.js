@@ -23,8 +23,6 @@ const state = {
   likedList: new LikedList()
 }
 
-window.state = state;
-
 /**
  * Handles recipe page opening via
  * recipe card click or page redirect
