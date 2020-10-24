@@ -5,6 +5,21 @@ import { selectors, elements, removeLoader, renderLoader } from 'Views/index';
 import * as searchView from 'Views/searchView';
 
 /**
+ * Persist search query in the local storage.
+ * @param {string} query 
+ */
+const persistQuery = query => {
+  localStorage.setItem('query', query);
+}
+
+/**
+ * Retrieves search query from the local storage.
+ */
+const retrieveQuery = () => {
+  return localStorage.getItem('query');
+}
+
+/**
  * Handles search form submit
  * 
  * @param {Event} event 
@@ -18,6 +33,9 @@ const searchSubmitHandler = async event => {
   if (query) {
     // Get a search query
     state.search = new Search(query);
+
+    // Persist query in local storage
+    persistQuery(query);
 
     // Clear old results
     searchView.clearInput();
@@ -41,6 +59,34 @@ const searchSubmitHandler = async event => {
   }
 }
 
+const initSearch = async () => {
+  const query = retrieveQuery();
+  
+  if (query && query.length > 0) {
+    // Get a search query
+    state.search = new Search(query);
+
+    // Clear old results
+    searchView.clearInput();
+    searchView.clearResults();
+
+    // Add a loader
+    renderLoader(elements.searchResultsWrapper);
+
+    try {
+      // Get search results
+      await state.search.getResults();
+
+      // Change state in store
+      removeLoader();
+      searchView.renderResults(state.search.result);
+    } catch (error) {
+      removeLoader();
+      throw error;
+    }
+  }
+}
+
 /**
  * Handles pagination container click event
  * and delegates it to the pagination buttons
@@ -58,4 +104,4 @@ const paginationClickHandler = event => {
   }
 }
 
-export { searchSubmitHandler, paginationClickHandler };
+export { searchSubmitHandler, initSearch, paginationClickHandler };

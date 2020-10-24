@@ -54,7 +54,10 @@ const recipeOpenHandler = async () => {
   }
 }
 
-window.addEventListener('load', likedListController.initLikedList);
+window.addEventListener('load', () => {
+  likedListController.initLikedList();
+  searchController.initSearch();
+});
 
 // Add event listener for a hash change and call the recipe open handler
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, recipeOpenHandler));

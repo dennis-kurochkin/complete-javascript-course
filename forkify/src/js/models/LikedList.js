@@ -61,6 +61,9 @@ class LikedList {
     localStorage.setItem('likedListItems', JSON.stringify(this.items));
   }
 
+  /**
+   * Retrieves items data from the local storage.
+   */
   retrieveData() {
     const data = JSON.parse(localStorage.getItem('likedListItems'));
 
