@@ -7,6 +7,7 @@ import * as recipeView from 'Views/recipeView';
 import * as recipeController from 'Controllers/recipeController';
 import * as searchController from 'Controllers/searchController';
 import * as shoppingListController from 'Controllers/shoppingListController';
+import * as likedListController from 'Controllers/likedListController';
 
 /** 
  * Global state of the app (store)
@@ -21,6 +22,8 @@ const state = {
   shoppingList: new ShoppingList(),
   likedList: new LikedList()
 }
+
+window.state = state;
 
 /**
  * Handles recipe page opening via
@@ -50,6 +53,8 @@ const recipeOpenHandler = async () => {
 
   }
 }
+
+window.addEventListener('load', likedListController.initLikedList);
 
 // Add event listener for a hash change and call the recipe open handler
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, recipeOpenHandler));

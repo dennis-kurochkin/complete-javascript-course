@@ -20,6 +20,8 @@ class LikedList {
 
     this.items.push(item);
 
+    this.persistData();
+
     return item;
   }
 
@@ -31,6 +33,7 @@ class LikedList {
    */
   removeItem(id) {
     this.items.splice(this.items.findIndex(item => item.id === id), 1);
+    this.persistData();
   }
 
   /**
@@ -49,6 +52,21 @@ class LikedList {
    */
   getLikesAmount() {
     return this.items.length;
+  }
+
+  /**
+   * Persist items in the local storage.
+   */
+  persistData() {
+    localStorage.setItem('likedListItems', JSON.stringify(this.items));
+  }
+
+  retrieveData() {
+    const data = JSON.parse(localStorage.getItem('likedListItems'));
+
+    if (data) {
+      this.items = data;
+    }
   }
 }
 
